@@ -20,5 +20,28 @@ describe Oystercard do
     end
   end
 
+  describe '#deduct' do
+    it "should reduce balance by its argument" do
+      subject.top_up(50)
+      subject.deduct(10)
+      expect(subject.balance).to eq(40)
+    end
+  end
+
+  describe '#touch_in' do
+    it "should change journey to true" do
+      subject.touch_in
+      expect(subject.in_journey?).to eq(true)
+    end
+  end
+
+  describe '#touch_out' do
+    it "should change journey to false" do
+      subject.touch_in
+      subject.touch_out
+      expect(subject.in_journey?).to eq(false)
+    end
+  end
+
 
 end
