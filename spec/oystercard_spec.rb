@@ -20,14 +20,6 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-    it "should reduce balance by its argument" do
-      subject.top_up(50)
-      subject.deduct(10)
-      expect(subject.balance).to eq(40)
-    end
-  end
-
   describe '#touch_in' do
     context "should change journey to true" do
       before do
