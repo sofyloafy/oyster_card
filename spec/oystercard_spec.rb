@@ -1,4 +1,5 @@
 require 'oystercard'
+
 describe Oystercard do
   it "should have a default balance of zero" do
     card = Oystercard.new
