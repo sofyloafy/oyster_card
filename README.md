@@ -36,3 +36,18 @@ initialize
 MININUM_FARE = 1
 touch_in
 fail message if min_fare > balance
+
+
+expect{ subject.touch_out }.to change{ subject.balance }.by(-min_fare)
+
+x = balance
+sub.touch_out
+y =balance
+expect(x-y).to eq (-min_fare)
+
+
+Rembering stations.
+'#touch_in' to take a station as argument
+
+touch_in(station)
+@entery station = station

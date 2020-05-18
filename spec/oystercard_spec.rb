@@ -44,9 +44,8 @@ describe Oystercard do
     end
     it "should charge mininum fare when touched out" do
       min_fare = Oystercard::MINIMUM_FARE
-      expect {subject.touch_out}.to change{subject.balance}.by(-min_fare)
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-min_fare)
     end
   end
-
 
 end
