@@ -29,17 +29,17 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-    it "should change journey to true" do
-      subject.touch_in
-      expect(subject.in_journey?).to eq(true)
+    context "should change journey to true" do
+      before { subject.touch_in }
+      it { is_expected.to be_in_journey }
     end
   end
 
   describe '#touch_out' do
-    it "should change journey to false" do
-      subject.touch_in
-      subject.touch_out
-      expect(subject.in_journey?).to eq(false)
+    context "should change journey to false" do
+      before { subject.touch_in
+      subject.touch_out }
+      it {is_expected.to_not be_in_journey }
     end
   end
 
