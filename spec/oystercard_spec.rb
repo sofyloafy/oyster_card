@@ -30,15 +30,24 @@ describe Oystercard do
 
   describe '#touch_in' do
     context "should change journey to true" do
-      before { subject.touch_in }
+      before do
+        subject.top_up(5)
+        subject.touch_in 
+      end
       it { is_expected.to be_in_journey }
+    end
+    it "should raise a fail message when balance below mininum fare" do
+      expect{ subject.touch_in }.to raise_error "Insufficient funds."
     end
   end
 
   describe '#touch_out' do
     context "should change journey to false" do
-      before { subject.touch_in
-      subject.touch_out }
+      before do 
+        subject.top_up(5)
+        subject.touch_in
+        subject.touch_out
+      end
       it {is_expected.to_not be_in_journey }
     end
   end

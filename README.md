@@ -13,3 +13,10 @@ fail "Maximum exceeded" if
 
 subject.deduct(fare) 
 fare - balance
+
+MININUM_FARE = 1
+
+touch_in
+fail message if min_fare > balance
+
+
