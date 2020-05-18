@@ -8,3 +8,8 @@ NameError:
 File path:
 An error occurred while loading ./spec/oystercard_spec.rb.
 
+topup(num)
+fail "Maximum exceeded" if 
+
+subject.deduct(fare) 
+fare - balance
