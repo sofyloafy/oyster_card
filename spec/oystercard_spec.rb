@@ -32,7 +32,7 @@ describe Oystercard do
     context "should change journey to true" do
       before do
         subject.top_up(5)
-        subject.touch_in 
+        subject.touch_in
       end
       it { is_expected.to be_in_journey }
     end
@@ -43,12 +43,16 @@ describe Oystercard do
 
   describe '#touch_out' do
     context "should change journey to false" do
-      before do 
+      before do
         subject.top_up(5)
         subject.touch_in
         subject.touch_out
       end
       it {is_expected.to_not be_in_journey }
+    end
+    it "should charge mininum fare when touched out" do
+      min_fare = Oystercard::MINIMUM_FARE
+      expect {subject.touch_out}.to change{subject.balance}.by(-min_fare)
     end
   end
 
