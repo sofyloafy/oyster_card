@@ -8,3 +8,6 @@ NameError:
 File path:
 An error occurred while loading ./spec/oystercard_spec.rb.
 
+
+card.top_up(number)
+car.balance == 0 + number
