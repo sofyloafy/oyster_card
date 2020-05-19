@@ -50,4 +50,14 @@ Rembering stations.
 '#touch_in' to take a station as argument
 
 touch_in(station)
-@entery station = station
+@entry station = station
+
+
+class Station
+attr_reader :zone_num
+
+
+def station(zone_num)
+@zone_num  = zone_num
+end
+
