@@ -61,3 +61,22 @@ def station(zone_num)
 @zone_num  = zone_num
 end
 
+
+class Journey
+PENALTY = x
+MIN
+responsibilities: starting a journey, finishing a journey, calculating fare, returning if a journey is complete.
+
+protect against edge cases by writing a journey_complete? method.
+
+def journey_complete?
+if touch_in + touch_out before midnight
+
+
+def fare
+if journey_complete?
+balance.deduct(MINIMUM_FARE)
+else
+balance.deduct(PENALTY + MINIMUM_FARE)
+
+
