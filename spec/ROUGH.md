@@ -29,3 +29,14 @@ subject.in_journey?
 
 initialize
 @journey = false
+
+touch_in
+
+journey class:
+starting a journey, finishing a journey, calculating the fare of a journey, and returning whether or not the journey is complete.
+
+PENALTY:90
+
+
+if injourney is true past midnight
+penalty

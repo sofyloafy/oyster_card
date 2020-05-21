@@ -1,17 +1,20 @@
 require 'oystercard'
 
 describe Oystercard do
-  let(:oxfordCircus) { double("entry_station") }
-  let(:bank) { double("exit_station") }
+  let(:entry_station) { double :station }
+  let(:exit_station) { double :station }
+  let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
 
 
   it "should have a default balance of zero" do
-    card = Oystercard.new
-    expect(card.balance).to eq 0
+    expect(subject.balance).to eq 0
   end
+
+
   it "should have an empty list of journeys by default" do
     expect(subject.journeys).to be_empty
   end
+
 
   describe '#top_up' do
     [2,32].each do |num|
@@ -20,6 +23,8 @@ describe Oystercard do
         expect(subject.balance).to eq(0 + num)
       end
     end
+
+
     it "should raise an error when if balance would go above maximum" do
     maximum = Oystercard::MAXIMUM_BALANCE
     subject.top_up(maximum)
@@ -27,20 +32,19 @@ describe Oystercard do
     end
   end
 
+
   describe '#touch_in' do
     context "should change journey to true" do
       before do
         subject.top_up(5)
-        subject.touch_in(oxfordCircus)
+        subject.touch_in(entry_station)
       end
-      # it { is_expected.to be_in_journey }
+      it "should remember the station in which the card was touched in" do
+        expect(subject.touch_in(entry_station)).to eq(entry_station)
+      end
     end
     it "should raise a fail message when balance below mininum fare" do
-      expect{ subject.touch_in(oxfordCircus) }.to raise_error "Insufficient funds."
-    end
-    it "should remember the station in which the card was touched in" do
-      subject.top_up(5)
-      expect(subject.touch_in(oxfordCircus)).to eq([{:entry_station => oxfordCircus}])
+      expect{ subject.touch_in(entry_station) }.to raise_error "Insufficient funds."
     end
   end
 
@@ -48,21 +52,27 @@ describe Oystercard do
     context "should change journey to false" do
       before do
         subject.top_up(5)
-        subject.touch_in(oxfordCircus)
-        subject.touch_out(bank)
+        subject.touch_in(entry_station)
+        subject.touch_out(exit_station)
       end
-      it {is_expected.to_not be_in_journey }
+      it 'stores exit station' do
+        expect(subject.touch_out(exit_station)).to eq(exit_station)
+      end
     end
     it "should charge mininum fare when touched out" do
       min_fare = Oystercard::MINIMUM_FARE
-      expect{ subject.touch_out(bank) }.to change{ subject.balance }.by(-min_fare)
+      expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by(-min_fare)
     end
-    it "should store the whole journey after #touch_in and #touch_out" do
-      subject.top_up(5)
-      subject.touch_in(oxfordCircus)
-      subject.touch_out(bank)
-      expect(subject.journeys).to eq ([{:entry_station => oxfordCircus}, {:exit_station => bank}])
-    end
+    
   end
 
+  describe "#journey" do
+    it 'stores a journey' do
+      subject.top_up(4)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.add_trip).to include journey
+    end
+  end
 end
+
