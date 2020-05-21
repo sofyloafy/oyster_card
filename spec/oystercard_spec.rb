@@ -38,9 +38,7 @@ describe Oystercard do
         subject.top_up(5)
         subject.touch_in(entry_station)
       end
-      it "should remember the station in which the card was touched in" do
-        expect(subject.touch_in(entry_station)).to eq(entry_station)
-      end
+     
     end
     it "should raise a fail message when balance below mininum fare" do
       expect{ subject.touch_in(entry_station) }.to raise_error "Insufficient funds."
