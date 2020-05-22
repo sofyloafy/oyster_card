@@ -11,11 +11,6 @@ describe Oystercard do
   end
 
 
-  it "should have an empty list of journeys by default" do
-    expect(subject.journeys).to be_empty
-  end
-
-
   describe '#top_up' do
     [2,32].each do |num|
       it "should increase balance by the argument" do
@@ -39,7 +34,7 @@ describe Oystercard do
         subject.top_up(5)
         subject.touch_in(entry_station)
       end
-     
+
     end
     it "should raise a fail message when balance below mininum fare" do
       expect{ subject.touch_in(entry_station) }.to raise_error "Insufficient funds."
@@ -53,16 +48,9 @@ describe Oystercard do
         subject.touch_in(entry_station)
         subject.touch_out(exit_station)
       end
-      xit 'stores exit station' do
-        expect(subject.touch_out(exit_station)).to eq(exit_station)
+      it "should charge the right fare when touched out" do
+        expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by(-Journey::FARE)
       end
     end
-    it "should charge mininum fare when touched out" do
-      min_fare = Oystercard::MINIMUM_FARE
-      expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by(-min_fare)
-    end
-
-    it "should charge a penalty fare if "
   end
 end
-

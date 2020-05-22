@@ -11,7 +11,7 @@ FARE = 1
   def begin_trip(station)
     @entry_station = station
     @journeys.push({entry_station: @entry_station})
-    end
+  end
 
   def end_trip(station)
     @exit_station = station
