@@ -1,5 +1,5 @@
 # require 'oystercard'
-class Journey 
+class Journey
 attr_accessor :journeys
 PENALTY = 6
 FARE = 1
@@ -20,5 +20,9 @@ FARE = 1
 
   def complete?
     @journeys[-1] == {entry_station: @entry_station, exit_station: @exit_station}
+  end
+
+  def fare
+    complete? ? FARE : PENALTY
   end
 end

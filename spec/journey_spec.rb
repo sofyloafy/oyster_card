@@ -27,5 +27,16 @@ describe Journey do
       subject.begin_trip(entry_station)
       expect(subject.complete?).to eq false
     end
+
+    it 'should return the penalty fare for incomplete journeys' do
+      subject.begin_trip(entry_station)
+      expect(subject.fare).to eq(Journey::PENALTY)
+    end
+
+    it 'should return basic fare for complete journeys' do
+      subject.begin_trip(entry_station)
+      subject.end_trip(exit_station)
+      expect(subject.fare).to eq(Journey::FARE)
+    end 
   end
 end
