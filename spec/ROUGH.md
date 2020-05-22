@@ -40,3 +40,33 @@ PENALTY:90
 
 if injourney is true past midnight
 penalty
+
+ => [{:entry_station=>"bank"}]  
+ => [{:entry_station=>"bank"}] 
+
+
+ <!-- Let's extract a JourneyLog class. It should be responsible for starting a journey, ending a journey and returning a list of journeys. -->
+
+
+ Station -- > JL #begin/end/record
+
+ JL #record  -- > Journey #complete?
+
+ Journey #fare -- > Oystercard #balance
+
+
+Oystercard -> track balance through #touch_in/ #touch_out
+
+Journey -> #fare based on whether journey #complete?
+
+Journey_Log -> beginning trip / ending trip/ saving trip 
+
+Station -> station and its zone
+
+
+JL
+ method to begin
+
+ method end
+
+ @list
