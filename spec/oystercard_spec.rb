@@ -1,4 +1,5 @@
 require 'oystercard'
+require 'journey'
 
 describe Oystercard do
   let(:entry_station) { double :station }
@@ -60,6 +61,8 @@ describe Oystercard do
       min_fare = Oystercard::MINIMUM_FARE
       expect{ subject.touch_out(exit_station) }.to change{ subject.balance }.by(-min_fare)
     end
+
+    it "should charge a penalty fare if "
   end
 end
 
